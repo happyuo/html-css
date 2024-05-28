@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('background.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+.logo{
+    font-size: 2em;
+    color: #1d7688;
+    user-select: none;
+}
+
+.navigation a {
+    position: relative;
+    font-size: 1.1em;
+    color:#1d7688;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+.navigation a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: #1d7688;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+/*a 밑줄*/
+.navigation a:hover::after {
+    transform-origin:left;
+    transform: scaleX(1);
+}
+/* 상단 로그인 버튼*/
+.navigation .btnLogin-popup {
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #1d7688;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #1d7688;
+    font-weight: 500;
+    margin-left: 40px;
+}
+/* 상단 로그인 버튼 눌렀을시*/
+.navigation .btnLogin-popup:hover{
+    background: #1d7688;
+    color: #ddfeff;
+
+
+}
+
+/*로그인 팝업*/
+.wrapper {
+    position: relative;
+    width: 400px;
+    height: 440px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /*팝업창에서 튀어나온 부분 안보이게 클리핑*/
+    transform: scale(0); /*크기0에서 시작 (안보임)*/
+    transition: transform .5s,  height .2s ease;
+}
+
+.wrapper.active-popup {
+    transform: scale(1); /*크기 1로 확대*/
+}
+
+.wrapper.active {
+    height: 520px;
+}
+/*로그인 팝업안에 글자랑 입력창*/
+.wrapper .form-box {
+    width: 100%;
+    padding: 40px;
+}
+/*로그인 팝업 원위치*/
+.wrapper.active .form-box.login {
+    /* transition: transform .18s ease; */
+    transform: translateX(0);
+}
+/*로그인 팝업 왼쪽으로 이동*/   
+.wrapper.active .form-box.login {
+    transition: none;
+    transform: translateX(-400px);
+}
+/*회원가입 팝업 오른쪽으로 이동*/
+.wrapper .form-box.register {
+    position: absolute;
+    transition: none;
+    transform: translateX(400px);
+}
+/*회원가입 팝업 원위치*/
+.wrapper.active .form-box.register {
+    /* transition: transform .18s ease; */
+    transform: translateX(0);
+}
+
+/* x 버튼 */
+.wrapper .icon-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width:45px;
+    height: 45px;
+    background: #73b2bf;
+    font-size: 2em;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-bottom-left-radius: 20px;
+    z-index: 1; /*x버튼이 글자보다 위에 나오게*/
+}
+/*login글자*/
+.form-box h2 {
+    font-size: 2em;
+    color: #1d7688;
+    text-align: center;
+}
+/*입력창*/
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #1d7688;
+    margin: 30px 0;
+}
+/*입력창에 글자*/
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #1d7688;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;    /*글자가 올라가는 속도*/
+}
+
+/*입력창에 글자가 올라갔을때*/
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+    top: -5px;  /*글자가 올라가는 정도*/
+}
+/*글자색*/
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #1d7688;
+    font-weight: 600;
+    padding: 0 35px 0 5px; /*입력칸 글자 아이콘에 안닿도록 조정*/
+}
+/*아이콘*/
+.input-box .icon {
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: #1d7688;
+    line-height: 57px;
+}
+
+/*remember me 글자*/
+.remember-forgot {
+    font-size: .9em;
+    color: #1d7688;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/*체크박스*/
+.remember-forgot label input {
+    accent-color: #1d7688;
+    margin-right: 3px;
+}
+
+/*forgot password 글자*/
+.remember-forgot a {
+    color: #1d7688;
+    text-decoration: none;
+}
+/*forgot password 글자 눌렀을때 밑줄*/
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+/*login 버튼*/
+.btn {
+    width: 100%;
+    height: 45px;
+    background : #73b2bf;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+}
+/*don't have an account 글자*/
+.login-register {
+    font-size: .9em;
+    color: #1d7688;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+/*register 글자*/
+.login-register p a{
+    color: #1d7688;
+    text-decoration: none;
+    font-weight: 600;
+}
+/*register 글자 눌렀을때 밑줄*/
+.login-register p a:hover {
+    text-decoration: underline;
+}
